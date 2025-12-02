@@ -51,6 +51,48 @@ func MemorySchemas() map[string]ToolSchema {
 				"required": []string{"fact"},
 			},
 		},
+		"memory_remember_episode": {
+			Description: "Store an agent-specific episode memory (short-term, thread-linked). Useful for recording tasks, work completed, observations, or operational memories that are specific to this agent's work.",
+			Schema: map[string]any{
+				"type": "object",
+				"properties": map[string]any{
+					"thread_id": map[string]any{
+						"type":        "string",
+						"description": "Thread or conversation identifier linking this episode to a specific task or conversation.",
+					},
+					"content": map[string]any{
+						"type":        "string",
+						"description": "Content of the episode - what happened, what was done, or what was observed.",
+					},
+					"metadata": map[string]any{
+						"type":        "object",
+						"description": "Optional additional metadata to associate with this episode.",
+					},
+				},
+				"required": []string{"thread_id", "content"},
+			},
+		},
+		"memory_remember_agent_fact": {
+			Description: "Store an agent-specific factual memory (long-term, agent-scoped). Useful for storing the agent's own operational knowledge, tasks it has been asked to do, work patterns, or other agent-specific information that should persist beyond a single thread.",
+			Schema: map[string]any{
+				"type": "object",
+				"properties": map[string]any{
+					"fact": map[string]any{
+						"type":        "string",
+						"description": "The factual information to remember about the agent's own operations, tasks, or work.",
+					},
+					"importance": map[string]any{
+						"type":        "number",
+						"description": "Optional importance score (0.0-1.0); if omitted, a reasonable default is used.",
+					},
+					"metadata": map[string]any{
+						"type":        "object",
+						"description": "Optional additional metadata to associate with this fact.",
+					},
+				},
+				"required": []string{"fact"},
+			},
+		},
 		"memory_normalize": {
 			Description: "Normalize a raw user or agent statement into a structured personal memory triple: normalized text, type, and tags.",
 			Schema: map[string]any{

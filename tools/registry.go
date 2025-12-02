@@ -180,6 +180,40 @@ func (r *Registry) RegisterMemoryTools(router *memory.MemoryRouter, apiKey strin
 		}, nil
 	})
 
+	r.Register("memory_remember_agent_fact", func(ctx context.Context, agentID string, args json.RawMessage) (any, error) {
+		var payload struct {
+			Fact       string                 `json:"fact"`
+			Importance float64                `json:"importance"`
+			Metadata   map[string]interface{} `json:"metadata"`
+		}
+		r.logger.Debug().Str("agentID", agentID).Msg("Received call to memory_remember_agent_fact")
+		if err := json.Unmarshal(args, &payload); err != nil {
+			r.logger.Warn().Err(err).Msg("Failed to decode arguments for memory_remember_agent_fact")
+			return nil, fmt.Errorf("failed to unmarshal arguments: %w", err)
+		}
+
+		// Validate fact is not empty
+		if strings.TrimSpace(payload.Fact) == "" {
+			r.logger.Warn().Str("agentID", agentID).Msg("Empty fact passed to memory_remember_agent_fact")
+			return nil, fmt.Errorf("fact cannot be empty")
+		}
+
+		r.logger.Info().Str("agentID", agentID).Str("fact", payload.Fact).Msg("Adding agent-specific fact")
+		item, err := router.AddAgentFact(ctx, agentID, payload.Fact, payload.Metadata)
+		if err != nil {
+			r.logger.Error().Str("agentID", agentID).Err(err).Msg("Failed to save agent fact")
+			return nil, fmt.Errorf("failed to save agent fact to database: %w", err)
+		}
+
+		r.logger.Debug().Int64("id", item.ID).Msg("memory_remember_agent_fact succeeded")
+		return map[string]any{
+			"id":      item.ID,
+			"scope":   item.Scope,
+			"type":    item.Type,
+			"created": item.CreatedAt,
+		}, nil
+	})
+
 	r.Register("memory_search", func(ctx context.Context, agentID string, args json.RawMessage) (any, error) {
 		var payload struct {
 			Query         string `json:"query"`
