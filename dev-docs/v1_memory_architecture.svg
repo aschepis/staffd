@@ -1,0 +1,320 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 2000" font-family="Arial, sans-serif">
+  <defs>
+    <linearGradient id="agentGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e1f5ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#b3e5fc;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="toolGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fff4e1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffe0b2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="storeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f3e5f5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e1bee7;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="dbGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffebee;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffcdd2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="searchGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e0f2f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#b2dfdb;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Title -->
+  <text x="700" y="30" font-size="24" font-weight="bold" text-anchor="middle">Memory Architecture
+    for Staffd Agents</text>
+
+  <!-- Agent Layer -->
+  <rect x="50" y="60" width="300" height="100" rx="10" fill="url(#agentGrad)" stroke="#01579b"
+    stroke-width="2" />
+  <text x="200" y="95" font-size="16" font-weight="bold" text-anchor="middle">Agent</text>
+  <text x="200" y="115" font-size="12" text-anchor="middle">Decides when to</text>
+  <text x="200" y="130" font-size="12" text-anchor="middle">store/retrieve</text>
+  <text x="200" y="145" font-size="12" text-anchor="middle">memories</text>
+
+  <!-- Memory Tools -->
+  <rect x="400" y="60" width="300" height="200" rx="10" fill="url(#toolGrad)" stroke="#e65100"
+    stroke-width="2" />
+  <text x="550" y="85" font-size="16" font-weight="bold" text-anchor="middle">Memory Tools</text>
+  <text x="420" y="110" font-size="11">• memory_normalize</text>
+  <text x="420" y="130" font-size="11">• memory_store_personal</text>
+  <text x="420" y="150" font-size="11">• memory_remember_fact</text>
+  <text x="420" y="170" font-size="11">• memory_remember_episode</text>
+  <text x="420" y="190" font-size="11">• memory_remember_agent_fact</text>
+  <text x="420" y="210" font-size="11">• memory_search</text>
+  <text x="420" y="230" font-size="11">• memory_search_personal</text>
+
+  <!-- Normalizer -->
+  <rect x="750" y="60" width="250" height="100" rx="10" fill="#fff9c4" stroke="#f57f17"
+    stroke-width="2" />
+  <text x="875" y="85" font-size="14" font-weight="bold" text-anchor="middle">Normalizer</text>
+  <text x="875" y="105" font-size="11" text-anchor="middle">Uses Anthropic LLM</text>
+  <text x="875" y="120" font-size="11" text-anchor="middle">to normalize text</text>
+  <text x="875" y="135" font-size="11" text-anchor="middle">→ type, tags</text>
+
+  <!-- Memory Router -->
+  <rect x="1050" y="60" width="300" height="200" rx="10" fill="#e8f5e9" stroke="#2e7d32"
+    stroke-width="2" />
+  <text x="1200" y="85" font-size="16" font-weight="bold" text-anchor="middle">Memory Router</text>
+  <text x="1070" y="110" font-size="11">Routes memory operations</text>
+  <text x="1070" y="130" font-size="11">• StorePersonalMemory</text>
+  <text x="1070" y="150" font-size="11">• AddAgentFact</text>
+  <text x="1070" y="170" font-size="11">• AddEpisode</text>
+  <text x="1070" y="190" font-size="11">• QueryAgentMemory</text>
+  <text x="1070" y="210" font-size="11">• QueryPersonalMemory</text>
+  <text x="1070" y="230" font-size="11">• Reflect (episode→fact)</text>
+
+  <!-- Memory Store -->
+  <rect x="400" y="300" width="300" height="180" rx="10" fill="url(#storeGrad)" stroke="#6a1b9a"
+    stroke-width="2" />
+  <text x="550" y="325" font-size="16" font-weight="bold" text-anchor="middle">Memory Store</text>
+  <text x="420" y="350" font-size="11">• remember() - stores memory</text>
+  <text x="420" y="370" font-size="11">• StorePersonalMemory()</text>
+  <text x="420" y="390" font-size="11">• SearchMemory() - hybrid search</text>
+  <text x="420" y="410" font-size="11">• EmbedText() - generates</text>
+  <text x="420" y="430" font-size="11"> embeddings via Embedder</text>
+  <text x="420" y="450" font-size="11">• Manages SQLite transactions</text>
+
+  <!-- Embedder -->
+  <rect x="750" y="300" width="250" height="100" rx="10" fill="#c5cae9" stroke="#283593"
+    stroke-width="2" />
+  <text x="875" y="325" font-size="14" font-weight="bold" text-anchor="middle">Embedder</text>
+  <text x="875" y="345" font-size="11" text-anchor="middle">Pluggable interface</text>
+  <text x="875" y="360" font-size="11" text-anchor="middle">• Ollama</text>
+  <text x="875" y="375" font-size="11" text-anchor="middle">• Anthropic</text>
+  <text x="875" y="390" font-size="11" text-anchor="middle">• OpenAI</text>
+
+  <!-- Database -->
+  <rect x="400" y="520" width="600" height="200" rx="10" fill="url(#dbGrad)" stroke="#c62828"
+    stroke-width="2" />
+  <text x="700" y="545" font-size="16" font-weight="bold" text-anchor="middle">SQLite Database</text>
+
+  <rect x="420" y="560" width="260" height="140" rx="5" fill="#ffffff" stroke="#666"
+    stroke-width="1" />
+  <text x="550" y="580" font-size="13" font-weight="bold" text-anchor="middle">memory_items</text>
+  <text x="430" y="600" font-size="10">• id, agent_id, thread_id</text>
+  <text x="430" y="615" font-size="10">• scope (agent|global)</text>
+  <text x="430" y="630" font-size="10">• type (fact|episode|profile)</text>
+  <text x="430" y="645" font-size="10">• content, embedding (blob)</text>
+  <text x="430" y="660" font-size="10">• metadata, importance</text>
+  <text x="430" y="675" font-size="10">• raw_content, memory_type</text>
+  <text x="430" y="690" font-size="10">• tags_json</text>
+
+  <rect x="720" y="560" width="260" height="140" rx="5" fill="#ffffff" stroke="#666"
+    stroke-width="1" />
+  <text x="850" y="580" font-size="13" font-weight="bold" text-anchor="middle">memory_items_fts</text>
+  <text x="730" y="600" font-size="10">FTS5 Virtual Table</text>
+  <text x="730" y="615" font-size="10">• rowid (→ memory_items.id)</text>
+  <text x="730" y="630" font-size="10">• content (FTS indexed)</text>
+  <text x="730" y="645" font-size="10">Used for full-text search</text>
+
+  <!-- Search Engine -->
+  <rect x="1050" y="300" width="300" height="220" rx="10" fill="url(#searchGrad)" stroke="#00695c"
+    stroke-width="2" />
+  <text x="1200" y="325" font-size="16" font-weight="bold" text-anchor="middle">Search Engine</text>
+  <text x="1070" y="350" font-size="12" font-weight="bold">Hybrid Search:</text>
+  <text x="1070" y="370" font-size="11">1. Vector Search (0.5)</text>
+  <text x="1080" y="385" font-size="10"> Cosine similarity</text>
+  <text x="1070" y="405" font-size="11">2. Tag Search (0.3)</text>
+  <text x="1080" y="420" font-size="10"> Jaccard similarity</text>
+  <text x="1070" y="440" font-size="11">3. FTS Search (0.2)</text>
+  <text x="1080" y="455" font-size="10"> SQLite FTS5</text>
+  <text x="1070" y="475" font-size="11">Merge &amp; rank by score</text>
+
+  <!-- Memory Types -->
+  <rect x="50" y="760" width="600" height="200" rx="10" fill="#f5f5f5" stroke="#424242"
+    stroke-width="2" />
+  <text x="350" y="785" font-size="16" font-weight="bold" text-anchor="middle">Memory Types</text>
+
+  <rect x="70" y="800" width="130" height="140" rx="5" fill="#ffcdd2" stroke="#c62828"
+    stroke-width="1" />
+  <text x="135" y="820" font-size="12" font-weight="bold" text-anchor="middle">Fact</text>
+  <text x="80" y="840" font-size="10">Long-term knowledge</text>
+  <text x="80" y="855" font-size="10">• Global: shared facts</text>
+  <text x="80" y="870" font-size="10">• Agent: agent-specific</text>
+  <text x="80" y="885" font-size="10">Importance: 0.7-0.9</text>
+  <text x="80" y="900" font-size="10">No thread_id</text>
+  <text x="80" y="915" font-size="10">Stored via:</text>
+  <text x="80" y="930" font-size="10">memory_remember_fact</text>
+
+  <rect x="220" y="800" width="130" height="140" rx="5" fill="#c8e6c9" stroke="#2e7d32"
+    stroke-width="1" />
+  <text x="285" y="820" font-size="12" font-weight="bold" text-anchor="middle">Episode</text>
+  <text x="230" y="840" font-size="10">Short-term, thread-linked</text>
+  <text x="230" y="855" font-size="10">• Agent-scoped only</text>
+  <text x="230" y="870" font-size="10">• Linked to thread_id</text>
+  <text x="230" y="885" font-size="10">Importance: 0.3</text>
+  <text x="230" y="900" font-size="10">Tasks, observations</text>
+  <text x="230" y="915" font-size="10">Stored via:</text>
+  <text x="230" y="930" font-size="10">memory_remember_episode</text>
+
+  <rect x="390" y="800" width="130" height="140" rx="5" fill="#bbdefb" stroke="#1565c0"
+    stroke-width="1" />
+  <text x="455" y="820" font-size="12" font-weight="bold" text-anchor="middle">Profile</text>
+  <text x="400" y="840" font-size="10">Normalized personal</text>
+  <text x="400" y="855" font-size="10">• Agent-scoped</text>
+  <text x="400" y="870" font-size="10">• Normalized text</text>
+  <text x="400" y="885" font-size="10">• Type: preference,</text>
+  <text x="400" y="900" font-size="10"> biographical, habit,</text>
+  <text x="400" y="915" font-size="10"> goal, value, project</text>
+  <text x="400" y="930" font-size="10">• Has tags</text>
+
+  <rect x="560" y="800" width="70" height="140" rx="5" fill="#fff9c4" stroke="#f57f17"
+    stroke-width="1" />
+  <text x="595" y="820" font-size="12" font-weight="bold" text-anchor="middle">DocRef</text>
+  <text x="570" y="840" font-size="10">Document</text>
+  <text x="570" y="855" font-size="10">reference</text>
+
+  <!-- Storage Flow -->
+  <rect x="700" y="760" width="650" height="200" rx="10" fill="#fffde7" stroke="#f57f17"
+    stroke-width="2" />
+  <text x="1025" y="785" font-size="16" font-weight="bold" text-anchor="middle">Storage Flow</text>
+
+  <text x="720" y="810" font-size="12" font-weight="bold">1. Agent decides to store memory</text>
+  <text x="720" y="830" font-size="12" font-weight="bold">2. Calls memory tool</text>
+  <text x="720" y="850" font-size="11"> • For personal: memory_normalize → memory_store_personal</text>
+  <text x="720" y="865" font-size="11"> • For fact/episode: memory_remember_*</text>
+  <text x="720" y="885" font-size="12" font-weight="bold">3. Memory Store processes:</text>
+  <text x="730" y="905" font-size="11"> • Generate embedding (via Embedder)</text>
+  <text x="730" y="920" font-size="11"> • Begin transaction</text>
+  <text x="730" y="935" font-size="11"> • INSERT into memory_items</text>
+  <text x="730" y="950" font-size="11"> • INSERT into memory_items_fts (for FTS)</text>
+  <text x="720" y="970" font-size="12" font-weight="bold">4. Commit transaction</text>
+
+  <!-- Retrieval Flow -->
+  <rect x="50" y="1000" width="1300" height="200" rx="10" fill="#e8f5e9" stroke="#2e7d32"
+    stroke-width="2" />
+  <text x="700" y="1025" font-size="16" font-weight="bold" text-anchor="middle">Retrieval Flow</text>
+
+  <text x="70" y="1055" font-size="12" font-weight="bold">1. Agent calls memory_search or
+    memory_search_personal</text>
+  <text x="70" y="1075" font-size="12" font-weight="bold">2. Memory Router builds SearchQuery</text>
+  <text x="80" y="1090" font-size="11"> • Optional: Generate query embedding</text>
+  <text x="80" y="1105" font-size="11"> • Set filters: scope, type, importance, time range</text>
+  <text x="70" y="1125" font-size="12" font-weight="bold">3. Search Engine executes hybrid search:</text>
+
+  <rect x="70" y="1140" width="380" height="50" rx="5" fill="#ffffff" stroke="#666" stroke-width="1" />
+  <text x="260" y="1160" font-size="11" font-weight="bold" text-anchor="middle">Vector Search
+    (Weight: 0.5)</text>
+  <text x="80" y="1175" font-size="10">• Load 500 candidates, compute cosine similarity</text>
+  <text x="80" y="1185" font-size="10">• Filter by scope/type/importance</text>
+
+  <rect x="470" y="1140" width="380" height="50" rx="5" fill="#ffffff" stroke="#666"
+    stroke-width="1" />
+  <text x="660" y="1160" font-size="11" font-weight="bold" text-anchor="middle">Tag Search (Weight:
+    0.3)</text>
+  <text x="480" y="1175" font-size="10">• Load 500 candidates, compute tag intersection</text>
+  <text x="480" y="1185" font-size="10">• Jaccard similarity scoring</text>
+
+  <rect x="870" y="1140" width="380" height="50" rx="5" fill="#ffffff" stroke="#666"
+    stroke-width="1" />
+  <text x="1060" y="1160" font-size="11" font-weight="bold" text-anchor="middle">FTS Search (Weight:
+    0.2)</text>
+  <text x="880" y="1175" font-size="10">• SQLite FTS5 MATCH query</text>
+  <text x="880" y="1185" font-size="10">• Returns row IDs, load items</text>
+
+  <text x="70" y="1205" font-size="12" font-weight="bold">4. Merge results by ID, sum weighted
+    scores</text>
+  <text x="70" y="1220" font-size="12" font-weight="bold">5. Sort by final score, apply limit</text>
+  <text x="70" y="1235" font-size="12" font-weight="bold">6. Return SearchResult[] to agent</text>
+
+  <!-- Decision Criteria -->
+  <rect x="50" y="1240" width="650" height="200" rx="10" fill="#fce4ec" stroke="#c2185b"
+    stroke-width="2" />
+  <text x="375" y="1265" font-size="16" font-weight="bold" text-anchor="middle">When to Store
+    Memories</text>
+
+  <text x="70" y="1290" font-size="11" font-weight="bold">Personal Info (Profile):</text>
+  <text x="80" y="1305" font-size="10">• Preferences (tools, languages, music, food)</text>
+  <text x="80" y="1320" font-size="10">• Biographical (age, background, education)</text>
+  <text x="80" y="1335" font-size="10">• Habits (work schedule, training patterns)</text>
+  <text x="80" y="1350" font-size="10">• Goals or projects</text>
+  <text x="80" y="1365" font-size="10">• Values ("I care about X")</text>
+
+  <text x="70" y="1385" font-size="11" font-weight="bold">Facts:</text>
+  <text x="80" y="1400" font-size="10">• Long-term knowledge about user (global fact)</text>
+  <text x="80" y="1415" font-size="10">• Agent-specific operational knowledge (agent fact)</text>
+
+  <text x="70" y="1435" font-size="11" font-weight="bold">Episodes:</text>
+  <text x="80" y="1450" font-size="10">• Short-term task/thread events</text>
+  <text x="80" y="1465" font-size="10">• Observations, work completed</text>
+
+  <!-- Key Features -->
+  <rect x="750" y="1240" width="600" height="200" rx="10" fill="#e3f2fd" stroke="#1565c0"
+    stroke-width="2" />
+  <text x="1050" y="1265" font-size="16" font-weight="bold" text-anchor="middle">Key Features</text>
+
+  <text x="770" y="1290" font-size="11" font-weight="bold">• Hybrid Search:</text>
+  <text x="780" y="1305" font-size="10"> Combines vector, FTS, and tag search</text>
+  <text x="780" y="1320" font-size="10"> Weighted scoring for best results</text>
+
+  <text x="770" y="1340" font-size="11" font-weight="bold">• Normalization:</text>
+  <text x="780" y="1355" font-size="10"> Personal memories normalized via LLM</text>
+  <text x="780" y="1370" font-size="10"> Structured: type, tags, third-person text</text>
+
+  <text x="770" y="1390" font-size="11" font-weight="bold">• Scoping:</text>
+  <text x="780" y="1405" font-size="10"> Agent-scoped (private) vs Global (shared)</text>
+  <text x="780" y="1420" font-size="10"> Thread-linked episodes for context</text>
+
+  <text x="770" y="1440" font-size="11" font-weight="bold">• Reflection:</text>
+  <text x="780" y="1455" font-size="10"> Episodes can be consolidated into facts</text>
+  <text x="780" y="1470" font-size="10"> Automatic or manual reflection</text>
+
+  <!-- Arrows -->
+  <!-- Agent to Tools -->
+  <path d="M 350 110 L 400 160" stroke="#333" stroke-width="2" fill="none"
+    marker-end="url(#arrowhead)" />
+
+  <!-- Tools to Normalizer -->
+  <path d="M 700 160 L 750 110" stroke="#333" stroke-width="2" fill="none"
+    marker-end="url(#arrowhead)" />
+
+  <!-- Tools to Router -->
+  <path d="M 700 160 L 1050 160" stroke="#333" stroke-width="2" fill="none"
+    marker-end="url(#arrowhead)" />
+
+  <!-- Normalizer to Router -->
+  <path d="M 1000 110 L 1050 160" stroke="#333" stroke-width="2" fill="none"
+    marker-end="url(#arrowhead)" />
+
+  <!-- Router to Store -->
+  <path d="M 1200 260 L 550 300" stroke="#333" stroke-width="2" fill="none"
+    marker-end="url(#arrowhead)" />
+
+  <!-- Store to Embedder -->
+  <path d="M 700 390 L 750 350" stroke="#333" stroke-width="2" fill="none"
+    marker-end="url(#arrowhead)" />
+  <path d="M 700 390 L 750 350" stroke="#333" stroke-width="1" fill="none" stroke-dasharray="5,5" />
+
+  <!-- Embedder to Store -->
+  <path d="M 1000 350 L 700 390" stroke="#333" stroke-width="2" fill="none"
+    marker-end="url(#arrowhead)" />
+  <path d="M 1000 350 L 700 390" stroke="#333" stroke-width="1" fill="none" stroke-dasharray="5,5" />
+
+  <!-- Store to Database -->
+  <path d="M 550 480 L 700 520" stroke="#333" stroke-width="2" fill="none"
+    marker-end="url(#arrowhead)" />
+
+  <!-- Router to Search -->
+  <path d="M 1200 260 L 1200 300" stroke="#333" stroke-width="2" fill="none"
+    marker-end="url(#arrowhead)" />
+
+  <!-- Search to Database -->
+  <path d="M 1200 520 L 1000 520" stroke="#333" stroke-width="2" fill="none"
+    marker-end="url(#arrowhead)" />
+  <path d="M 1200 520 L 1000 520" stroke="#333" stroke-width="1" fill="none" stroke-dasharray="5,5" />
+
+  <!-- Search to Router -->
+  <path d="M 1200 520 L 1200 260" stroke="#333" stroke-width="2" fill="none"
+    marker-end="url(#arrowhead)" />
+  <path d="M 1200 520 L 1200 260" stroke="#333" stroke-width="1" fill="none" stroke-dasharray="5,5" />
+
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#333" />
+    </marker>
+  </defs>
+</svg>
